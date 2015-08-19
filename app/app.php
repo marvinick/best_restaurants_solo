@@ -14,6 +14,9 @@
         'twig.path' => __DIR__.'/../views'
     ));
 
+    use Symfony\Component\HttpFoundation\Request;
+    Request::enableHttpMethodParameterOverride();
+
     $app->get("/", function() use ($app) {
         return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
     });
@@ -27,6 +30,18 @@
         $cuisine = new Cuisine($_POST['name']);
         $cuisine->save();
         return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
+    });
+
+    $app->get("/cuisines/{id}/edit", function($id) use ($app) {
+        $cuisine = Cuisine::find($id);
+        return $app['twig']->render('cuisine_edit.html.twig', array('cuisine' => $cuisine));
+    });
+
+    $app->patch("/cuisines/{id}", function($id) use ($app) {
+        $name = $_POST['name'];
+        $cuisine = Cuisine::find($id);
+        $cuisine->update($name);
+        return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' => $cuisine->getRestaurants()));
     });
 
     $app->post("/delete_cuisines", function() use ($app) {
@@ -50,6 +65,17 @@
     $app->post("/delete_restaurants", function() use ($app) {
         Restaurant::deleteAll();
         return $app['twig']->render('index.html.twig');
+    });
+
+    $app->get("/cuisines/{id}/edit", function($id) use ($app) {
+        $cuisine = Cuisine::find($id);
+        return $app['twig']->render('cuisine_edit.html.twig', array('cuisine' => $cuisine));
+    });
+
+    $app->delete("/cuisines/{id}", function($id) use ($app) {
+        $cuisine = Cuisine::find($id);
+        $cuisine->delete();
+        return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
     });
 
     return $app;

@@ -126,7 +126,64 @@
             $this->assertEquals([$test_restaurant, $test_restaurant2], $result);
         }
 
+        function testUpdate()
+        {
+            //arrange
+            $name = "Steak";
+            $id = null;
+            $test_cuisine = new Cuisine($name, $id);
+            $test_cuisine->save();
+
+            $new_name = "Burger";
+
+            //Act
+            $test_cuisine->update($new_name);
+
+            //Assert
+            $this->assertEquals("Burger", $test_cuisine->getName());
+
+        }
+
+        function testDelete()
+        {
+            //arrange
+            $name = "noodle";
+            $id = null;
+            $test_cuisine = new Cuisine($name, $id);
+            $test_cuisine->save();
+
+            $name2 = "burger";
+            $test_cuisine2 = new Cuisine($name2, $id);
+            $test_cuisine2->save();
+
+            //act
+            $test_cuisine->delete();
+
+            //assert
+            $this->assertEquals([$test_cuisine2], Cuisine::getAll());
+        }
+
+        function testDeleteCuisineRestaurants()
+        {
+          //arrange
+          $name = "noodle";
+          $id = null;
+          $test_cuisine = new Cuisine($name, $id);
+          $test_cuisine->save();
+
+          $name = "wendys";
+          $cuisine_id = $test_cuisine->getId();
+          $test_restaurant = new Restaurant($name, $id, $cuisine_id);
+          $test_restaurant->save();
+
+          //act
+          $test_cuisine->delete();
+
+          //assert
+          $this->assertEquals([], Restaurant::getAll());
+        }
 
 
     }
+
 ?>

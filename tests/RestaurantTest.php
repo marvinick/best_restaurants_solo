@@ -21,20 +21,7 @@
           Restaurant::deleteAll();
           Cuisine::deleteAll();
         }
-
-        // function test_getName()
-        // {
-        //     //Arrange
-        //     $name = "Pok Pok";
-        //     $test_restaurant = new Restaurant($name);
-        //
-        //     //Act
-        //     $result = $test_restaurant->getName();
-        //
-        //     //Assert
-        //     $this->assertEquals($name, $result);
-        // }
-
+        
         function test_getId()
         {
             //Arrange
