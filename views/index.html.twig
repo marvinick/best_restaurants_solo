@@ -24,5 +24,9 @@
     {% else %}
       <p>There are no cuisines yet!</p>
     {% endif %}
+    <br/>
+    <form action='/delete_restaurants' method='post'>
+        <button type='submit'>Clear</button>
+    </form>
 </body>
 </html>

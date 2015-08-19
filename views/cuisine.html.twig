@@ -5,7 +5,7 @@
 <body>
     <h1>{{ cuisine.getName }}</h1>
 
-    {% if restaurant is not empty %}
+    {% if restaurants is not empty %}
         <p>Here are the restaurants:</p>
         <ul>
             {% for restaurant in restaurants %}
@@ -18,12 +18,16 @@
 
     <form action='/restaurants' method='post'>
         <input id="cuisine_id" name="cuisine_id" type="hidden" value="{{ cuisine.getId() }}">
-        <label for='name'>Cuisine Name</label>
+        <label for='name'>Restaurant Name</label>
         <input id='name' name='name' type='text'>
 
         <button type='submit'>Add restaurant</button>
     </form>
 
     <p><a href='/'>Home</a></p>
+
+    <form action='/delete_restaurants' method='post'>
+        <button type='submit'>Clear</button>
+    </form>
 </body>
 </html>
