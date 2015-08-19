@@ -75,7 +75,7 @@
             $name = "Pok Pok";
             $location = "Portland";
             $cuisine_id = $test_cuisine->getId();
-            $test_restaurant = new Restaurant($name, $id, $cuisine_id, $location);
+            $test_restaurant = new Restaurant($name, $id, $location, $cuisine_id);
 
             //Act
             $test_restaurant->save();
@@ -96,12 +96,12 @@
             $name = "Pok Pok";
             $location = "Portland";
             $cuisine_id = $test_cuisine->getId();
-            $test_restaurant = new Restaurant($name, $id, $cuisine_id, $location);
+            $test_restaurant = new Restaurant($name, $id, $location, $cuisine_id);
             $test_restaurant->save();
 
             $name2 = "Uchi";
             $location2 = "Seattle";
-            $test_restaurant2 = new Restaurant($name2, $id, $cuisine_id, $location2);
+            $test_restaurant2 = new Restaurant($name2, $id, $location2, $cuisine_id);
             $test_restaurant2->save();
 
             //Act
@@ -127,7 +127,7 @@
 
             $name2 = "Uchi";
             $location2 = "Seattle";
-            $test_restaurant2 = new Restaurant($name2, $location2, $id, $cuisine_id);
+            $test_restaurant2 = new Restaurant($name2, $id, $location2, $cuisine_id);
             $test_restaurant2->save();
 
 
