@@ -5,8 +5,24 @@
 <body>
     <h1>Welcome to Cuisine List</h1>
 
-    <p><a href="/restaurants">Click here</a> to see all of the restaurants and to add a restaurant.</p>
-    <p><a href="/cuisines">Click here</a> to see all of the cuisines and to add a cuisine.</p>
+    <p>Create a new cuisine:</p>
 
+    <form action="/cuisines" method="post">
+        <label for="name">Cuisine name:</label>
+        <input id="name" name="name" type="text">
+
+        <button type="submit">Add cuisine</button>
+    </form>
+
+    {% if cuisines is not empty %}
+        <p>Here are all your cuisines:</p>
+        <ul>
+            {% for cuisine in cuisines %}
+                <li><a href="/cuisines/{{ cuisine.getId }}">{{ cuisine.getName }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+      <p>There are no cuisines yet!</p>
+    {% endif %}
 </body>
 </html>
