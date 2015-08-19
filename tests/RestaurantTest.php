@@ -6,6 +6,7 @@
     */
 
     require_once "src/Restaurant.php";
+    require_once "src/Cuisine.php";
 
     $server = 'mysql:host=localhost;dbname=food_test';
     $username = 'root';
@@ -18,30 +19,57 @@
         protected function tearDown()
         {
           Restaurant::deleteAll();
+          Cuisine::deleteAll();
         }
 
-        function test_getName()
-        {
-            //Arrange
-            $name = "Pok Pok";
-            $test_Restaurant = new Restaurant($name);
-
-            //Act
-            $result = $test_Restaurant->getName();
-
-            //Assert
-            $this->assertEquals($name, $result);
-        }
+        // function test_getName()
+        // {
+        //     //Arrange
+        //     $name = "Pok Pok";
+        //     $test_restaurant = new Restaurant($name);
+        //
+        //     //Act
+        //     $result = $test_restaurant->getName();
+        //
+        //     //Assert
+        //     $this->assertEquals($name, $result);
+        // }
 
         function test_getId()
         {
             //Arrange
-            $name = "Pok Pok";
-            $id = 1;
-            $test_Restaurant = new Restaurant($name, $id);
+            $name = "Steak";
+            $id = null;
+            $test_cuisine = new Cuisine($name, $id);
+            $test_cuisine->save();
+
+            $name = "Wendy";
+            $cuisine_id = $test_cuisine->getId();
+            $test_restaurant = new Restaurant($name, $id, $cuisine_id);
+            $test_restaurant->save();
 
             //Act
-            $result = $test_Restaurant->getId();
+            $result = $test_restaurant->getId();
+
+            //Assert
+            $this->assertEquals(true, is_numeric($result));
+        }
+
+        function test_getCuisineId()
+        {
+            //Arrange
+            $name = "Steak";
+            $id = null;
+            $test_cuisine = new Cuisine($name, $id);
+            $test_cuisine->save();
+
+            $name = "Wendy";
+            $cuisine_id = $test_cuisine->getId();
+            $test_restaurant = new Restaurant($name, $id, $cuisine_id);
+            $test_restaurant->save();
+
+            //Act
+            $result = $test_restaurant->getCuisineId();
 
             //Assert
             $this->assertEquals(true, is_numeric($result));
@@ -50,67 +78,96 @@
         function test_save()
         {
             //Arrange
-            $name = "Restaurant";
-            $test_Restaurant = new Restaurant($name);
-            $test_Restaurant->save();
+            $name = 'Steak';
+            $id = null;
+            $test_cuisine = new Cuisine($name, $id);
+            $test_cuisine->save();
+
+            $name = "Pok Pok";
+            $cuisine_id = $test_cuisine->getId();
+            $test_restaurant = new Restaurant($name, $id, $cuisine_id);
 
             //Act
-            $result = Restaurant::getAll();
+            $test_restaurant->save();
 
             //Assert
-            $this->assertEquals($test_Restaurant, $result[0]);
+            $result = Restaurant::getAll();
+            $this->assertEquals($test_restaurant, $result[0]);
         }
 
         function test_getAll()
         {
             //Arrange
+            $name = "Steak";
+            $id = null;
+            $test_cuisine = new Cuisine($name, $id);
+            $test_cuisine->save();
+
             $name = "Pok Pok";
+            $cuisine_id = $test_cuisine->getId();
+            $test_restaurant = new Restaurant($name, $id, $cuisine_id);
+            $test_restaurant->save();
+
             $name2 = "Uchi";
-            $test_Restaurant = new Restaurant($name);
-            $test_Restaurant->save();
-            $test_Restaurant2 = new Restaurant($name2);
-            $test_Restaurant2->save();
+            $test_restaurant2 = new Restaurant($name2, $id, $cuisine_id);
+            $test_restaurant2->save();
 
             //Act
             $result = Restaurant::getAll();
 
             //Assert
-            $this->assertEquals([$test_Restaurant, $test_Restaurant2], $result);
+            $this->assertEquals([$test_restaurant, $test_restaurant2], $result);
         }
 
         function test_deleteAll()
         {
-            //Arrange
+            //arrange
+            $name = "Steak";
+            $id = null;
+            $test_cuisine = new Cuisine($name, $id);
+            $test_cuisine->save();
+
             $name = "Pok Pok";
+            $cuisine_id = $test_cuisine->getId();
+            $test_restaurant = new Restaurant($name, $id, $cuisine_id);
+            $test_restaurant->save();
+
             $name2 = "Uchi";
-            $test_Restaurant = new Restaurant($name);
-            $test_Restaurant->save();
-            $test_Restaurant2 = new Restaurant($name2);
-            $test_Restaurant2->save();
+            $test_restaurant2 = new Restaurant($name2, $id, $cuisine_id);
+            $test_restaurant2->save();
+
 
             //Act
             Restaurant::deleteAll();
-            $result = Restaurant::getAll();
+
 
             //Assert
+            $result = Restaurant::getAll();
             $this->assertEquals([], $result);
         }
 
         function test_find()
         {
-            //Arrange
+            //arrange
+            $name = "Steak";
+            $id = null;
+            $test_cuisine = new Cuisine($name, $id);
+            $test_cuisine->save();
+
             $name = "Pok Pok";
+            $cuisine_id = $test_cuisine->getId();
+            $test_restaurant = new Restaurant($name, $id, $cuisine_id);
+            $test_restaurant->save();
+
             $name2 = "Uchi";
-            $test_Restaurant = new Restaurant($name);
-            $test_Restaurant->save();
-            $test_Restaurant2 = new Restaurant($name2);
-            $test_Restaurant2->save();
+            $test_restaurant2 = new Restaurant($name2, $id, $cuisine_id);
+            $test_restaurant2->save();
 
             //Act
-            $result = Restaurant::find($test_Restaurant->getId());
+            $result = Restaurant::find($test_restaurant->getId());
 
             //Assert
-            $this->assertEquals($test_Restaurant, $result);
+            $this->assertEquals($test_restaurant, $result);
         }
     }
 

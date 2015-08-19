@@ -17,6 +17,7 @@
         protected function tearDown()
         {
             Cuisine::deleteAll();
+            Restaurant::deleteAll();
         }
 
         function test_save()
@@ -98,6 +99,31 @@
 
             //Assert
             $this->assertEquals($test_Cuisine, $result);
+        }
+
+        function testGetRestaurants()
+        {
+            //arrange
+            $name = "Steak" ;
+            $id = null;
+            $test_cuisine = new Cuisine($name, $id);
+            $test_cuisine->save();
+
+            $test_cuisine_id = $test_cuisine->getId();
+
+            $name = "Pok Pok";
+            $test_restaurant = new Restaurant($name, $id, $test_cuisine_id);
+            $test_restaurant->save();
+
+            $name2 = "Wendys";
+            $test_restaurant2 = new Restaurant($name2, $id, $test_cuisine_id);
+            $test_restaurant2->save();
+
+            //Act
+            $result = $test_cuisine->getRestaurants();
+
+            //assert
+            $this->assertEquals([$test_restaurant, $test_restaurant2], $result);
         }
 
 
