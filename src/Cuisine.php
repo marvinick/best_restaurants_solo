@@ -27,7 +27,7 @@
             return $this->id;
         }
 
-        function getCategoryId()
+        function getCuisineId()
         {
             return $this->restaurant_id;
         }
@@ -78,7 +78,8 @@
               $name = $restaurant['name'];
               $id = $restaurant['id'];
               $cuisine_id = $restaurant['cuisine_id'];
-              $new_restaurant = new Restaurant($name, $id, $cuisine_id);
+              $location = $restaurant ['location'];
+              $new_restaurant = new Restaurant($name, $id, $location, $cuisine_id);
               array_push($restaurants, $new_restaurant);
           }
           return $restaurants;

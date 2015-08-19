@@ -13,7 +13,7 @@
     $password = 'root';
     $DB = new PDO($server, $username, $password);
 
-    class CategoryTest extends PHPUnit_Framework_TestCase
+    class RestaurantTest extends PHPUnit_Framework_TestCase
     {
 
         protected function tearDown()
@@ -21,7 +21,7 @@
           Restaurant::deleteAll();
           Cuisine::deleteAll();
         }
-        
+
         function test_getId()
         {
             //Arrange
@@ -31,8 +31,9 @@
             $test_cuisine->save();
 
             $name = "Wendy";
+            $location = "portland";
             $cuisine_id = $test_cuisine->getId();
-            $test_restaurant = new Restaurant($name, $id, $cuisine_id);
+            $test_restaurant = new Restaurant($name, $id, $location, $cuisine_id);
             $test_restaurant->save();
 
             //Act
@@ -51,8 +52,9 @@
             $test_cuisine->save();
 
             $name = "Wendy";
+            $location = "Portland";
             $cuisine_id = $test_cuisine->getId();
-            $test_restaurant = new Restaurant($name, $id, $cuisine_id);
+            $test_restaurant = new Restaurant($name, $id, $location, $cuisine_id);
             $test_restaurant->save();
 
             //Act
@@ -71,8 +73,9 @@
             $test_cuisine->save();
 
             $name = "Pok Pok";
+            $location = "Portland";
             $cuisine_id = $test_cuisine->getId();
-            $test_restaurant = new Restaurant($name, $id, $cuisine_id);
+            $test_restaurant = new Restaurant($name, $id, $cuisine_id, $location);
 
             //Act
             $test_restaurant->save();
@@ -91,12 +94,14 @@
             $test_cuisine->save();
 
             $name = "Pok Pok";
+            $location = "Portland";
             $cuisine_id = $test_cuisine->getId();
-            $test_restaurant = new Restaurant($name, $id, $cuisine_id);
+            $test_restaurant = new Restaurant($name, $id, $cuisine_id, $location);
             $test_restaurant->save();
 
             $name2 = "Uchi";
-            $test_restaurant2 = new Restaurant($name2, $id, $cuisine_id);
+            $location2 = "Seattle";
+            $test_restaurant2 = new Restaurant($name2, $id, $cuisine_id, $location2);
             $test_restaurant2->save();
 
             //Act
@@ -115,12 +120,14 @@
             $test_cuisine->save();
 
             $name = "Pok Pok";
+            $location = "Portland";
             $cuisine_id = $test_cuisine->getId();
-            $test_restaurant = new Restaurant($name, $id, $cuisine_id);
+            $test_restaurant = new Restaurant($name, $id, $location, $cuisine_id);
             $test_restaurant->save();
 
             $name2 = "Uchi";
-            $test_restaurant2 = new Restaurant($name2, $id, $cuisine_id);
+            $location2 = "Seattle";
+            $test_restaurant2 = new Restaurant($name2, $location2, $id, $cuisine_id);
             $test_restaurant2->save();
 
 
@@ -142,12 +149,14 @@
             $test_cuisine->save();
 
             $name = "Pok Pok";
+            $location = "Portland";
             $cuisine_id = $test_cuisine->getId();
-            $test_restaurant = new Restaurant($name, $id, $cuisine_id);
+            $test_restaurant = new Restaurant($name, $id, $location, $cuisine_id);
             $test_restaurant->save();
 
             $name2 = "Uchi";
-            $test_restaurant2 = new Restaurant($name2, $id, $cuisine_id);
+            $location2 = "Seattle";
+            $test_restaurant2 = new Restaurant($name2, $id, $location2, $cuisine_id);
             $test_restaurant2->save();
 
             //Act
