@@ -1,0 +1,54 @@
+<html>
+     <head>
+         <title>Cuisines Result</title>
+         <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css'>
+     </head>
+     <body>
+       <nav class="navbar navbar-inverse">
+             <div class="container-fluid">
+               <!-- Brand and toggle get grouped for better mobile display -->
+               <div class="navbar-header">
+                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                   <span class="sr-only">Toggle navigation</span>
+                   <span class="icon-bar"></span>
+                   <span class="icon-bar"></span>
+                   <span class="icon-bar"></span>
+                 </button>
+                 <a class="navbar-brand" href='/'>Restaurants</a>
+               </div>
+
+               <!-- Collect the nav links, forms, and other content for toggling -->
+               <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                 <div>
+                   <form action='/cuisine_results' class="navbar-form navbar-left">
+                     <div class='form-group'>
+                       <input id='name' name='name' class='form-control' type='text' placeholder="Enter cuisine name">
+
+                       <button type="submit" class="btn btn-success">Submit</button>
+                     </div>
+                   </form>
+                 </div>
+                 <ul class="nav navbar-nav navbar-right">
+
+                     </ul>
+                   </li>
+                 </ul>
+               </div><!-- /.navbar-collapse -->
+             </div><!-- /.container-fluid -->
+           </nav>
+
+       <div class='container'>
+         <h1>Cuisine Search Result</h1>
+        <ul>
+        {% if matched_cuisines is not empty %}
+
+            {% for cuisine in matched_cuisines %}
+            <h4>Result</h4>
+                 <h2><li><a href="/cuisines/{{ cuisine.getId }}">{{ cuisine.getName }}</a></li></h2>
+            {% endfor %}
+        {% else %}
+            <h4>No cuisine match your search</h4>
+        {% endif %}
+        </ul>
+    </body>
+</html>

@@ -70,15 +70,25 @@
         return $app['twig']->render('index.html.twig');
     });
 
-    // $app->get("/cuisines/{id}/edit", function($id) use ($app) {
-    //     $cuisine = Cuisine::find($id);
-    //     return $app['twig']->render('cuisine_edit.html.twig', array('cuisine' => $cuisine));
-    // });
-
     $app->delete("/cuisines/{id}", function($id) use ($app) {
         $cuisine = Cuisine::find($id);
         $cuisine->delete();
         return $app['twig']->render('index.html.twig', array('cuisines' => Cuisine::getAll()));
+    });
+
+    $app->get('/cuisine_results', function() use ($app) {
+        $cuisine_matching_search = array();
+        $cuisines = Cuisine::getAll();
+        $name = $_GET['name'];
+        foreach ($cuisines as $cuisine) {
+            if ($cuisine->getName() == $name)
+             {
+                 ucfirst($name);
+                 array_push($cuisine_matching_search, $cuisine);
+             }
+
+        }
+        return $app['twig']->render('result.html.twig', array('matched_cuisines' => $cuisine_matching_search));
     });
 
     return $app;

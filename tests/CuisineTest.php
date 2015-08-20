@@ -149,12 +149,12 @@
         function testDelete()
         {
             //arrange
-            $name = "noodle";
+            $name = "Noodle";
             $id = null;
             $test_cuisine = new Cuisine($name, $id);
             $test_cuisine->save();
 
-            $name2 = "burger";
+            $name2 = "Burger";
             $test_cuisine2 = new Cuisine($name2, $id);
             $test_cuisine2->save();
 
