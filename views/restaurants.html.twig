@@ -10,15 +10,18 @@
         <ul>
             {% for restaurant in restaurants %}
                 <li>{{ restaurant.getName }}</li>
+                <li>{{ restaurant.getLocation }}</li>
             {% endfor %}
         </ul>
     {% endif %}
 
     <form action='/restaurants' method='post'>
-        <label for='name'>Category name</label>
+        <label for='name'>Restaurant</label>
         <input id='name' name='name' type='text'>
 
-        <button type='submit'>Add category</button>
+
+
+        <button type='submit'>Add restaurant</button>
     </form>
     <form action='/delete_cuisines' method='post'>
         <button type='submit'>Clear</button>

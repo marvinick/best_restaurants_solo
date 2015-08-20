@@ -57,8 +57,9 @@
 
     $app->post("/restaurants", function() use ($app) {
         $name = $_POST['name'];
+        $location = $_POST['location'];
         $cuisine_id = $_POST['cuisine_id'];
-        $restaurant = new Restaurant($name, $id = null, $cuisine_id);
+        $restaurant = new Restaurant($name, $id = null, $location, $cuisine_id);
         $restaurant->save();
         $cuisine = Cuisine::find($cuisine_id);
         return $app['twig']->render('cuisine.html.twig', array('cuisine' => $cuisine, 'restaurants' => $cuisine->getRestaurants()));
@@ -69,10 +70,10 @@
         return $app['twig']->render('index.html.twig');
     });
 
-    $app->get("/cuisines/{id}/edit", function($id) use ($app) {
-        $cuisine = Cuisine::find($id);
-        return $app['twig']->render('cuisine_edit.html.twig', array('cuisine' => $cuisine));
-    });
+    // $app->get("/cuisines/{id}/edit", function($id) use ($app) {
+    //     $cuisine = Cuisine::find($id);
+    //     return $app['twig']->render('cuisine_edit.html.twig', array('cuisine' => $cuisine));
+    // });
 
     $app->delete("/cuisines/{id}", function($id) use ($app) {
         $cuisine = Cuisine::find($id);
