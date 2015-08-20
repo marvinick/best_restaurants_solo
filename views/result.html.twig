@@ -38,13 +38,12 @@
            </nav>
 
        <div class='container'>
-         <h1>Cuisine Search Result</h1>
+         <h1>Search Result</h1>
         <ul>
         {% if matched_cuisines is not empty %}
 
             {% for cuisine in matched_cuisines %}
-            <h4>Result</h4>
-                 <h2><li><a href="/cuisines/{{ cuisine.getId }}">{{ cuisine.getName }}</a></li></h2>
+              <h3><a href="/cuisines/{{ cuisine.getId }}">{{ cuisine.getName }}</a></h3>
             {% endfor %}
         {% else %}
             <h4>No cuisine match your search</h4>

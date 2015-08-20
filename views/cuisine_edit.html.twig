@@ -7,7 +7,7 @@
 </head>
 <body>
 
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-inverse">
         <div class="container-fluid">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
@@ -25,7 +25,7 @@
             <div>
               <form action='/cuisine_results' class="navbar-form navbar-left">
                 <div class='form-group'>
-                  <input id='name' name='name' class='form-control' type='text' placeholder="Enter cuisine name">
+                  <input id='name' name='name' class='form-control' type='text' placeholder="lowercase cuisine name">
 
                   <button type="submit" class="btn btn-success">Submit</button>
                 </div>
@@ -40,21 +40,18 @@
 
 <div class="container">
 
-  <h1>Update the {{ cuisine.getName }} cuisine </h1>
+  <h1>update <em>{{ cuisine.getName }}</em></h1>
 
   <form action="/cuisines/{{ cuisine.getId }}" method="post">
     <input name="_method" type="hidden" value="patch">
 
-    <label for="name">Rename your cuisine:</label>
-    <input id="name" name="name" type="text">
+    <div class='form-group'>
+      <input id="name" name="name" type="text" placeholder="rename cuisine">
+    </div>
     <button type="submit" class="btn-primary">Update</button>
   </form>
 
-    <form action="/cuisines/{{ cuisine.getId }}" method="post">
-      <input name="_method" type="hidden" value="delete">
 
-      <button type="submit" class="btn-danger">Delete this cuisine</button>
-    </form>
 <div>
 </body>
 </html>

@@ -80,10 +80,10 @@
         $cuisine_matching_search = array();
         $cuisines = Cuisine::getAll();
         $name = $_GET['name'];
+        ucfirst($name);
         foreach ($cuisines as $cuisine) {
             if ($cuisine->getName() == $name)
              {
-                 ucfirst($name);
                  array_push($cuisine_matching_search, $cuisine);
              }
 
