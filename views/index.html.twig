@@ -1,32 +1,47 @@
 <html>
 <head>
     <title>Cuisine List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Welcome to Cuisine List</h1>
+    <div class="container">
+        <div clas="row">
+            <h1 class="text-center">Welcome to Best Restaurants</h1>
+            <hr>
+            <div class="col-md-6">
+                <h2>Create a new cuisine:</h2>
+                <div class="control-group">
+                    <form action="/cuisines" method="post">
+                        <label for="name">Name :</label>
+                        <br>
+                        <input id="name" name="name" type="text">
+                        <hr>
+                        <button type="submit" class="btn-primary btn-lg">Add cuisine</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6">
+                {% if cuisines is not empty %}
+                    <h4>Here are all your cuisines:</h4>
+                    <ul>
+                        {% for cuisine in cuisines %}
+                            <li><a href="/cuisines/{{ cuisine.getId }}">{{ cuisine.getName }}</a></li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                  <p>There are no cuisines yet!</p>
+                {% endif %}
+                <br>
+            <form action='/delete_restaurants' method='post'>
+                <button type='submit' class="btn-primary btn-lg">Clear</button>
+            </form>
+            </div>
 
-    <p>Create a new cuisine:</p>
 
-    <form action="/cuisines" method="post">
-        <label for="name">Cuisine name:</label>
-        <input id="name" name="name" type="text">
 
-        <button type="submit">Add cuisine</button>
-    </form>
-
-    {% if cuisines is not empty %}
-        <p>Here are all your cuisines:</p>
-        <ul>
-            {% for cuisine in cuisines %}
-                <li><a href="/cuisines/{{ cuisine.getId }}">{{ cuisine.getName }}</a></li>
-            {% endfor %}
-        </ul>
-    {% else %}
-      <p>There are no cuisines yet!</p>
-    {% endif %}
-    <br/>
-    <form action='/delete_restaurants' method='post'>
-        <button type='submit'>Clear</button>
-    </form>
+        </div>
+    </div>
 </body>
 </html>

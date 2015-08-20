@@ -1,36 +1,41 @@
 <html>
 <head>
     <title>Cuisine List</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>{{ cuisine.getName }}</h1>
+    <div class="container">
+        <h1>{{ cuisine.getName }}</h1>
 
-    {% if restaurants is not empty %}
-        <p>Here are the restaurants:</p>
-        <ul>
-            {% for restaurant in restaurants %}
-                <li>{{ restaurant.getName }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+        {% if restaurants is not empty %}
+            <p>Here are the restaurants:</p>
+            <ul>
+                {% for restaurant in restaurants %}
+                    <li>{{ restaurant.getName }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
 
-    <h4>Add a restaurant</h4>
+        <h4>Add a restaurant</h4>
 
-    <form action='/restaurants' method='post'>
-        <input id="cuisine_id" name="cuisine_id" type="hidden" value="{{ cuisine.getId() }}">
-        <label for='name'>Restaurant Name</label>
-        <input id='name' name='name' type='text'>
+        <form action='/restaurants' method='post'>
+            <input id="cuisine_id" name="cuisine_id" type="hidden" value="{{ cuisine.getId() }}">
+            <label for='name'>Restaurant Name</label>
+            <input id='name' name='name' type='text'>
 
-        <button type='submit'>Add restaurant</button>
-    </form>
+            <button type='submit'>Add restaurant</button>
+        </form>
 
-    <p><a href="/cuisines/{{ cuisine.getId }}/edit">Edit this cuisine</a></p>
+        <p><a href="/cuisines/{{ cuisine.getId }}/edit">Edit this cuisine</a></p>
 
 
-    <p><a href='/'>Home</a></p>
+        <p><a href='/'>Home</a></p>
 
-    <form action='/delete_restaurants' method='post'>
-        <button type='submit'>Clear</button>
-    </form>
+        <form action='/delete_restaurants' method='post'>
+            <button type='submit'>Clear</button>
+        </form>
+    </div>
 </body>
 </html>
